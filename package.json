@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "npm start --prefix server",
-    "install-all": "npm install && cd client && npm install && cd ../server && npm install",
+    "start": "node index.js",
+    "postinstall": "npm install --prefix server",
+    "install-all": "npm install && npm install --prefix client && npm install --prefix server",
     "client": "npm start --prefix client",
-    "server": "npm run dev --prefix server",
+    "server": "npm start --prefix server",
     "dev": "npm-run-all --parallel client server",
     "build-client": "npm run build --prefix client"
   },
