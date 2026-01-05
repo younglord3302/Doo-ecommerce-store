@@ -1,0 +1,24 @@
+# render.yaml
+# Render Blueprint for E-Commerce SaaS Backend
+
+services:
+  - type: web
+    name: doo-ecommerce-backend
+    runtime: node
+    plan: free  # Change to 'starter' for production
+    buildCommand: npm install && npm install --prefix server
+    startCommand: node index.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        sync: false  # Set manually in Render dashboard
+      - key: JWT_SECRET
+        generateValue: true  # Render will generate a secure random value
+      - key: STRIPE_SECRET_KEY
+        sync: false  # Set manually in Render dashboard
+      - key: FRONTEND_URL
+        value: https://doo-ecommerce-store.vercel.app,http://localhost:3000

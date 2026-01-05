@@ -2,9 +2,9 @@
 
 This document provides a quick reference for all environment variables needed for deployment.
 
-## Backend Environment Variables (Railway)
+## Backend Environment Variables (Render)
 
-Copy these to your Railway project settings:
+Copy these to your Render service environment settings:
 
 ```bash
 # Database - MongoDB Atlas
@@ -61,4 +61,4 @@ Ensure your MongoDB Atlas cluster allows connections from Railway:
 
 ---
 
-**Ready to deploy?** Follow the [RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md) guide.
+**Ready to deploy?** Follow the [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md) guide.
