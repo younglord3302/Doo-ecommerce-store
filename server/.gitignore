@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Local env files
+.env
+.env.local
+
+# Uploads
+uploads/*
+!uploads/.gitkeep
+
+# Misc
+.DS_Store
+*.log

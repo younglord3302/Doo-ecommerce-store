@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:6.0
+    container_name: ecommerce_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+    volumes:
+      - mongodb_data:/data/db
+      - ./server/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
+    networks:
+      - ecommerce_network
+
+  # Node.js Backend API
+  backend:
+    build: ./server
+    container_name: ecommerce_backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://admin:password123@mongodb:27017/ecommerce?authSource=admin
+      - JWT_SECRET=your_jwt_secret_key_here
+      - STRIPE_SECRET_KEY=your_stripe_secret_key
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    depends_on:
+      - mongodb
+    networks:
+      - ecommerce_network
+
+  # React Frontend
+  frontend:
+    build: ./client
+    container_name: ecommerce_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000/api
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - ecommerce_network
+
+volumes:
+  mongodb_data:
+
+networks:
+  ecommerce_network:
+    driver: bridge

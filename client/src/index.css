@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-dark-900 text-gray-100 antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-xl;
+  }
+  
+  .glass-card {
+    @apply glass rounded-2xl p-6 transition-all duration-300 hover:border-accent-indigo/40 hover:bg-white/10;
+  }
+
+  .btn-artistic {
+    @apply px-6 py-2.5 rounded-full font-semibold transition-all duration-300 active:scale-95;
+  }
+
+  .btn-glow {
+    @apply btn-artistic bg-accent-indigo text-white hover:shadow-[0_0_20px_rgba(99,102,241,0.5)] hover:bg-indigo-500;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-indigo via-accent-cyan to-accent-rose;
+  }
+
+  .input-artistic {
+    @apply w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent-indigo/50 transition-all text-white placeholder-gray-500;
+  }
+}
+
+/* Background Aura */
+.bg-aura {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.05) 0%, transparent 30%),
+              radial-gradient(circle at 80% 80%, rgba(244, 63, 94, 0.05) 0%, transparent 30%);
+}
